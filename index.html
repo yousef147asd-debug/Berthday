@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#08060e" />
+  <title>For Aya — A Birthday Universe</title>
+  <meta name="description" content="A little universe made for Aya's birthday." />
+
+  <!-- Fonts: Cormorant Garamond (display serif) + Jost (UI sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════ Fixed WebGL canvas (the universe behind everything) ══════════ -->
+  <canvas id="universe" aria-hidden="true"></canvas>
+
+  <!-- Cinematic vignette + grain overlay -->
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Music toggle (only acts on user tap — autoplay-safe) -->
+  <button id="musicToggle" class="music-toggle" aria-label="Toggle music" title="Music">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18V5l12-2v13" />
+      <circle cx="6" cy="18" r="3" />
+      <circle cx="18" cy="16" r="3" />
+    </svg>
+    <span class="music-state"><span class="on">On</span><span class="off">Off</span></span>
+  </button>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+    <span class="scroll-hint-label">scroll</span>
+    <span class="scroll-hint-line"></span>
+  </div>
+
+  <main id="journey">
+
+    <!-- ══════════ ACT I · Opening ══════════ -->
+    <section class="scene scene-opening" id="scene-opening">
+      <div class="opening-core">
+        <p class="opening-line" id="openLine1">I made something special for you…</p>
+        <p class="opening-line" id="openLine2">Because today isn't just another day.</p>
+        <p class="opening-line opening-line--aya" id="openLine3">Today is <em>Aya's</em> day</p>
+        <button class="btn btn-glow hidden" id="enterBtn">
+          <span>Enter Your Surprise</span>
+          <span class="btn-spark">✦</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ══════════ ACT II · The Heart (3D canvas takes the stage) ══════════ -->
+    <section class="scene scene-heart" id="scene-heart">
+      <div class="scene-caption">
+        <p class="eyebrow">for the one</p>
+        <h2 class="display">who makes<br /><em>everything</em> softer</h2>
+      </div>
+    </section>
+
+    <!-- ══════════ ACT III · The Letter ══════════ -->
+    <section class="scene scene-letter" id="scene-letter">
+      <div class="letter-card">
+        <p class="letter-dear">Dear Aya…</p>
+        <p class="letter-body"><span id="typewriter"></span><span class="caret" id="caret"></span></p>
+      </div>
+    </section>
+
+    <!-- ══════════ ACT IV · The Cake ══════════ -->
+    <section class="scene scene-cake" id="scene-cake">
+      <div class="scene-caption scene-caption--top">
+        <p class="eyebrow">close your eyes</p>
+        <h2 class="display">and <em>wish</em></h2>
+      </div>
+      <div class="wish-anchor">
+        <button class="btn btn-glow" id="wishBtn">
+          <span>Make a Wish</span>
+          <span class="btn-spark">✦</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Wish overlay (dark moment → fireworks text) -->
+    <div class="wish-overlay" id="wishOverlay" aria-hidden="true">
+      <div class="wish-text">
+        <h2 class="wish-title" id="wishTitle">Happy Birthday <em>Aya</em></h2>
+        <p class="wish-sub" id="wishSub">May every wish you make today find its way to you.</p>
+      </div>
+    </div>
+
+    <!-- ══════════ ACT V · Memories ══════════ -->
+    <section class="scene scene-memories" id="scene-memories">
+      <div class="scene-caption">
+        <p class="eyebrow">a little something</p>
+        <h2 class="display">from me<br /><em>to you</em></h2>
+      </div>
+      <div class="memory-field" id="memoryField">
+        <article class="memory-card" data-depth="1.0">
+          <span class="memory-num">i</span>
+          <p>Your smile makes ordinary moments feel special.</p>
+        </article>
+        <article class="memory-card" data-depth="0.6">
+          <span class="memory-num">ii</span>
+          <p>You deserve every beautiful thing life can give you.</p>
+        </article>
+        <article class="memory-card" data-depth="1.4">
+          <span class="memory-num">iii</span>
+          <p>I hope we create many more memories together.</p>
+        </article>
+        <article class="memory-card" data-depth="0.8">
+          <span class="memory-num">iv</span>
+          <p>Somewhere between laughing with you and talking for hours, you became my favorite part of the day.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ══════════ ACT VI · Finale ══════════ -->
+    <section class="scene scene-finale" id="scene-finale">
+      <div class="finale-core">
+        <p class="finale-aya" id="finaleAya">AYA</p>
+        <h2 class="finale-title" id="finaleTitle">Happy Birthday, <em>my love</em></h2>
+        <p class="finale-sub" id="finaleSub">This little world was made just for you.</p>
+        <button class="btn btn-glow" id="replayBtn">
+          <span>Replay My Surprise</span>
+          <span class="btn-spark">✦</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Libraries (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
